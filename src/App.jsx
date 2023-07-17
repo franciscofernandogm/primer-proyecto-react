@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import foto1 from './img/foto-perfil-1.jpg';
+import foto2 from './img/foto-perfil-2.jpg';
+import foto3 from './img/foto-perfil-3.jpeg';
+import {TwitterFollowCard} from './TwitterFollowCard.jsx'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export function App(){
+    return(
+        <section id='tw-follow'>
+            <h2>Recomendaciones</h2>
+            <TwitterFollowCard 
+                name="Francisco Gavilan" 
+                userName="ffgavilanm" 
+                img={foto1}
+                isFollowing="True"/>
+            <TwitterFollowCard 
+                name="Grecia Cuyubamba" 
+                userName="gacuyubambab" 
+                img={foto2}
+                isFollowing="True"/>
+            <TwitterFollowCard 
+                name="Alessia Montalvan" 
+                userName="alemontalvan" 
+                img={foto3}
+                isFollowing="True"/> 
+        </section>
+    )
 }
-
-export default App
