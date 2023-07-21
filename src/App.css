@@ -1,10 +1,9 @@
 #tw-follow{
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.95);
   color: white;
   border-radius: 20px;
   padding:20px 30px;
-  width: 400px;
-  margin: 0 auto;
+  width: 600px;
 }
 
 #tw-follow h2{
@@ -27,10 +26,40 @@
   align-self: center;
 }
 
-.tw-follow-card button{
+.tw-followCard-button{
+  width: 150px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.tw-followCard-button button{
+  cursor: pointer;
   background-color: white;
   border-radius: 50px;
   padding: 10px 20px;
   font-weight: bold;
   border: 0px;
+  transition: all 0.3s;
+}
+
+.tw-followCard-button button:hover{
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.tw-followCard-button.is-following button{
+  background-color: black;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  border: 1px solid white;
+  transition: all 0.3s;
+}
+
+.tw-followCard-button.is-following button:hover{
+  background-color: black;
+  padding: 10px 20px;
+  color: red;
+  border: 2px solid red;
 }

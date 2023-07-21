@@ -12,17 +12,17 @@ export function App(){
                 name="Francisco Gavilan" 
                 userName="ffgavilanm" 
                 img={foto1}
-                isFollowing="True"/>
+                isFollowing/>
             <TwitterFollowCard 
                 name="Grecia Cuyubamba" 
                 userName="gacuyubambab" 
                 img={foto2}
-                isFollowing="True"/>
+                isFollowing/>
             <TwitterFollowCard 
                 name="Alessia Montalvan" 
                 userName="alemontalvan" 
                 img={foto3}
-                isFollowing="True"/> 
+                isFollowing={false}/> 
         </section>
     )
 }
