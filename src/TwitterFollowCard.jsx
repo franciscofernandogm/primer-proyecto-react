@@ -2,11 +2,11 @@ import {useState} from 'react'
 
 //siempre poner el nombre de una función en PascalCase
 
-export function TwitterFollowCard({name,userName, img}){
+export function PokemonFollowCard({name,types, img}){
 
     const [state,setState]=useState({
         isFollowing:false,
-        text:'Seguir',
+        text:'Atrapar',
     })
 
     const handleClick=()=>{
@@ -14,7 +14,7 @@ export function TwitterFollowCard({name,userName, img}){
             ...state,
             isFollowing:!state.isFollowing,
             //el isFollowing que toma es el antes de ser cambiado
-            text:state.isFollowing?'Seguir':'Dejar de Seguir'
+            text:state.isFollowing?'Atrapar':'Liberar'
         })
     }
 
@@ -22,7 +22,7 @@ export function TwitterFollowCard({name,userName, img}){
         if(state.isFollowing){
             setState({
                 ...state,
-                text:'Dejar de Seguir'
+                text:'Liberar'
             })
         }
     }
@@ -31,7 +31,7 @@ export function TwitterFollowCard({name,userName, img}){
         if(state.isFollowing){
             setState({
                 ...state,
-                text:'Siguiendo'
+                text:'Atrapado'
             })
         }
     }
@@ -41,11 +41,11 @@ export function TwitterFollowCard({name,userName, img}){
 
     return(
         <article className='tw-follow-card'>
-            <img alt="Foto de Usuario" src={img}/>
-            <div>
+            <img alt={name} src={img}/>
+            <div className='tw-follow-card-name'>
                 <h4>{name}</h4>
                 <span>
-                    @{userName}
+                    {types}
                 </span>
             </div>
             <div className={buttonClassName}>
