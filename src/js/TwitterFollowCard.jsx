@@ -43,7 +43,7 @@ export function PokemonFollowCard({name,types, img}){
         <article className='tw-follow-card'>
             <img alt={name} src={img}/>
             <div className='tw-follow-card-name'>
-                <h4>{name}</h4>
+                <h5>{name}</h5>
                 <span>
                     {types}
                 </span>

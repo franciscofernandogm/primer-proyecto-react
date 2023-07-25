@@ -2,10 +2,9 @@
 import foto2 from './img/foto-perfil-2.jpg';
 import foto3 from './img/foto-perfil-3.jpeg';*/
 import { useState,useEffect } from 'react';
-import CryptoJS from 'crypto-js';
 import axios from 'axios';
+import {Navegador} from './Navegador'
 import {Results} from './KantoPokemons';
-import {SearchBar} from './Search';
 import { ButtonMarvelApi } from './MarvelApi';
 import '../css/style.css'
 
@@ -36,12 +35,13 @@ export function App(){
     }, []);
 
     if (loading) {
-        return <div>Cargando...</div>;
+        return <div id='charge'>Cargando...</div>;
     }
 
     return(
         <>  
-            <h1>Pokemons</h1>
+            <Navegador/>
+            <h1>Kanto's Pokemons</h1>
             <Results allPokemons={kantoPokemon} />
             <ButtonMarvelApi/>
         </>
