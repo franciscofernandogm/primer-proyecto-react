@@ -4,9 +4,10 @@ import foto3 from './img/foto-perfil-3.jpeg';*/
 import { useState,useEffect } from 'react';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';
-import {PokemonFollowCard} from './TwitterFollowCard.jsx';
+import {Results} from './KantoPokemons';
+import {SearchBar} from './Search';
 import { ButtonMarvelApi } from './MarvelApi';
-import './App.css'
+import '../css/style.css'
 
 export function App(){
     const [kantoPokemon, setKantoPokemon] = useState([]);
@@ -38,21 +39,10 @@ export function App(){
         return <div>Cargando...</div>;
     }
 
-    console.log(kantoPokemon)
     return(
         <>  
             <h1>Pokemons</h1>
-            <section id='tw-follow'>
-                {kantoPokemon.map(pokemon => (
-                    <PokemonFollowCard 
-                        key={pokemon.id}
-                        name={pokemon.name} 
-                        types={pokemon.types.map(type => (
-                            <span key={type.type.name}>@{type.type.name}</span>
-                        ))}
-                        img={pokemon.sprites.front_default}/>
-                ))}
-            </section>
+            <Results allPokemons={kantoPokemon} />
             <ButtonMarvelApi/>
         </>
     )
