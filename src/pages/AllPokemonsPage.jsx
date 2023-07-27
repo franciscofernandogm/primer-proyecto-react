@@ -3,12 +3,9 @@ import foto2 from './img/foto-perfil-2.jpg';
 import foto3 from './img/foto-perfil-3.jpeg';*/
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import {Navegador} from './Navegador'
-import {Results} from './KantoPokemons';
-import { ButtonMarvelApi } from './MarvelApi';
-import '../css/style.css'
+import {Results} from '../components/Pokemons/KantoPokemons';
 
-export function App(){
+const AllPokemons=()=>{
     const [kantoPokemon, setKantoPokemon] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -35,15 +32,21 @@ export function App(){
     }, []);
 
     if (loading) {
-        return <div id='charge'>Cargando...</div>;
+        return (
+            <div id='pikachu-charging'>
+                <p>Cargando...</p>
+                <div>
+                    <img className="pikachu" alt="Pikachu Cargando" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"/>
+                </div>
+            </div>)
     }
 
     return(
         <>  
-            <Navegador/>
             <h1>Kanto's Pokemons</h1>
             <Results allPokemons={kantoPokemon} />
-            <ButtonMarvelApi/>
         </>
     )
 }
+
+export default AllPokemons

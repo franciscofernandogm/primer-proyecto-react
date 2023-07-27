@@ -2,7 +2,7 @@ import {useState} from 'react'
 
 //siempre poner el nombre de una función en PascalCase
 
-export function PokemonFollowCard({name,types, img}){
+export function PokemonCard({name,types, img}){
 
     const [state,setState]=useState({
         isFollowing:false,

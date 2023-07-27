@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import {PokemonFollowCard} from './TwitterFollowCard.jsx';
-import { SearchBar } from './Search.jsx';
+import {PokemonCard} from './PokemonCard.jsx';
+import './Pokemon.css'
 
 export function Results(allPokemons){
 
@@ -10,9 +10,7 @@ export function Results(allPokemons){
     })
 
     const handleSearch=(searchTerm)=> {
-        // Lógica de búsqueda aquí (puedes usar APIs, datos estáticos, etc.)
-        // Por ahora, solo simularemos una búsqueda simple.
-
+        
         if(searchTerm===''){
             setPokemons({
                 ...pokemons,
@@ -30,14 +28,21 @@ export function Results(allPokemons){
             })
         }
       };
+
+    const handleChange = (event) => {
+        const searchTerm = event.target.value;
+        handleSearch(searchTerm);
+    };
     
     return(
         <>  
-            <SearchBar searching={handleSearch}/>
+            <div className="search">
+                <input type="text" placeholder="Buscar..." onChange={handleChange} />
+            </div>
             <section id='tw-follow'>
                 {pokemons.pokemons.map(pokemon=>(
                     
-                    <PokemonFollowCard 
+                    <PokemonCard 
                         key={pokemon.id}
                         name={pokemon.name} 
                         types={pokemon.types.map(type => (
