@@ -2,49 +2,86 @@
 import foto2 from './img/foto-perfil-2.jpg';
 import foto3 from './img/foto-perfil-3.jpeg';*/
 import { useState,useEffect } from 'react';
-import axios from 'axios';
 import {Results} from '../components/Pokemons/KantoPokemons';
+import {Slider} from '../components/Slider/Slider'
 
-const AllPokemons=()=>{
-    const [kantoPokemon, setKantoPokemon] = useState([]);
-    const [loading, setLoading] = useState(true);
+const AllPokemons=({pokemons,isCatching,changeIsCatching})=>{
 
-    useEffect(() => {
-        const fetchKantoPokemon = async () => {
-        const firstGenerationRange = Array.from({ length: 151 }, (_, index) => index + 1);
-        let kantoPokemonList = [];
+    const pokemonsPorPagina=18
+    const totalPaginas = Math.ceil(pokemons.length / pokemonsPorPagina);
 
-        for (const id of firstGenerationRange) {
-            try {
-            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            const data = response.data;
-            kantoPokemonList.push(data);
-            } catch (error) {
-            console.error('Error al hacer la solicitud:', error);
-            }
-        }
+    const [paginaActual, setPaginaActual] = useState({
+        pagina:1,
+        pokemonsPaginados: pokemons.slice(0, pokemonsPorPagina),
+        isFiltered:false
+    });
 
-        setKantoPokemon(kantoPokemonList);
-        setLoading(false);
-        };
-
-        fetchKantoPokemon();
-    }, []);
-
-    if (loading) {
-        return (
-            <div id='pikachu-charging'>
-                <p>Cargando...</p>
-                <div>
-                    <img className="pikachu" alt="Pikachu Cargando" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"/>
-                </div>
-            </div>)
+    const calcularPokemonsPaginados=(pag)=>{
+        const indexUltimoPokemon = pag * pokemonsPorPagina;
+        const indexPrimerPokemon = indexUltimoPokemon - pokemonsPorPagina;
+        const pokemonsPaginados = pokemons.slice(indexPrimerPokemon, indexUltimoPokemon);
+        return pokemonsPaginados
     }
+
+    const changePageBack=()=>{
+        setPaginaActual({
+            ...paginaActual,
+            pagina:paginaActual.pagina - 1,
+            pokemonsPaginados: calcularPokemonsPaginados(paginaActual.pagina - 1)
+        })
+    }
+
+    const changePageThen=()=>{
+        setPaginaActual({
+            ...paginaActual,
+            pagina:paginaActual.pagina + 1,
+            pokemonsPaginados: calcularPokemonsPaginados(paginaActual.pagina + 1)
+        })
+    }
+
+    const changePage=(pag)=>{
+        setPaginaActual({
+            ...paginaActual,
+            pagina:pag,
+            pokemonsPaginados: calcularPokemonsPaginados(pag)
+        })
+    }
+
+    const handleSearch=(searchTerm)=> {
+        
+        if(searchTerm===''){
+            setPaginaActual({
+                ...paginaActual,
+                pagina:1,
+                pokemonsPaginados: pokemons.slice(0, pokemonsPorPagina),
+                isFiltered:false
+            })
+        }else{
+            const filteredPokemons = pokemons.filter((kantoPokemon) =>
+                kantoPokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setPaginaActual({
+                ...paginaActual,
+                pokemonsPaginados:filteredPokemons,
+                isFiltered:true
+            })
+        }
+      };
+
+    const handleChange = (event) => {
+        const searchTerm = event.target.value;
+        handleSearch(searchTerm);
+    };
 
     return(
         <>  
             <h1>Kanto's Pokemons</h1>
-            <Results allPokemons={kantoPokemon} />
+            <div className="search">
+                <input type="text" placeholder="Buscar..." onChange={handleChange} />
+            </div>
+            <Slider totalPaginas={totalPaginas} changePageBack={changePageBack} changePageThen={changePageThen} changePage={changePage} paginaActual={paginaActual}/>
+            <Results allPokemons={paginaActual.pokemonsPaginados} isCatching={isCatching} changeIsCatching={changeIsCatching}/>
+            <Slider totalPaginas={totalPaginas} changePageBack={changePageBack} changePageThen={changePageThen} changePage={changePage} paginaActual={paginaActual}/>
         </>
     )
 }

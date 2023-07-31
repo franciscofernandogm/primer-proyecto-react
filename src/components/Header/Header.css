@@ -1,3 +1,8 @@
+.poke-navegador img {
+  width: 30px;
+  height: 30px;
+}
+
 .poke-navegador div ul {
   width: 100%;
   justify-content: flex-end;

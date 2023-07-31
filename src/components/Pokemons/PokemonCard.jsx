@@ -1,25 +1,26 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 //siempre poner el nombre de una función en PascalCase
 
-export function PokemonCard({name,types, img}){
+export function PokemonCard({id, name,types, img, isCatching, changeIsCatching}){
 
     const [state,setState]=useState({
-        isFollowing:false,
-        text:'Atrapar',
+        text:isCatching?'Atrapado':'Atrapar'
     })
+    
+        
 
     const handleClick=()=>{
         setState({
             ...state,
-            isFollowing:!state.isFollowing,
             //el isFollowing que toma es el antes de ser cambiado
-            text:state.isFollowing?'Atrapar':'Liberar'
+            text:!isCatching?'Liberar':'Atrapar'
         })
+        changeIsCatching(!isCatching, id)
     }
 
     const handleMouseOver=()=>{
-        if(state.isFollowing){
+        if(isCatching){
             setState({
                 ...state,
                 text:'Liberar'
@@ -28,7 +29,7 @@ export function PokemonCard({name,types, img}){
     }
 
     const handleMouseOut=()=>{
-        if(state.isFollowing){
+        if(isCatching){
             setState({
                 ...state,
                 text:'Atrapado'
@@ -36,7 +37,7 @@ export function PokemonCard({name,types, img}){
         }
     }
 
-    const buttonClassName=state.isFollowing
+    const buttonClassName=isCatching
     ? 'tw-followCard-button is-following':'tw-followCard-button'
 
     return(
