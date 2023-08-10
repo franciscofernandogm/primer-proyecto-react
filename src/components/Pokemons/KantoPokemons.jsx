@@ -1,8 +1,15 @@
-import { useState } from 'react';
 import {PokemonCard} from './PokemonCard.jsx';
 import './Pokemon.css'
+import { useSelector } from 'react-redux';
 
-export function Results({allPokemons,isCatching, changeIsCatching}){
+export function Results({allPokemons}){
+
+    const isCatching=useSelector(state=>state.pokedex.isCatching)
+
+    function capitalizeFirstLetter(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+    
     return(
         <>  
             <section id='tw-follow'>
@@ -11,13 +18,14 @@ export function Results({allPokemons,isCatching, changeIsCatching}){
                     <PokemonCard 
                         key={pokemon.id}
                         id={pokemon.id}
-                        name={pokemon.name} 
+                        name={capitalizeFirstLetter(pokemon.name)} 
                         types={pokemon.types.map(type => (
-                            <span key={type.type.name}>@{type.type.name}</span>
+                            <span key={type.type.name} className={type.type.name}>
+                                {capitalizeFirstLetter(type.type.name)}
+                            </span>
                         ))}
                         img={pokemon.sprites.front_default}
-                        isCatching={isCatching[pokemon.id]}
-                        changeIsCatching={changeIsCatching}/>
+                        isCatching={isCatching[pokemon.id]}/>
                 ))}
             </section>
         </>

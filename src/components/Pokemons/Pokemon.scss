@@ -35,11 +35,28 @@
   }
 
   @keyframes pokemon {
-    50%{transform: scale(1.5);}
+    50%{transform: scale(2);}
   }
   
   .tw-follow-card-name{
     width: 150px;
+  }
+
+  .tw-follow-card-name h5{
+    font-weight: 600;
+  }
+
+  .tw-follow-card-name p{
+    margin: 0px;
+  }
+
+  .tw-follow-card-name span{
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-right: 3px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
   }
   
   .tw-follow-card div{
@@ -83,3 +100,5 @@
     color: red;
     border: 2px solid red;
   }
+
+

@@ -4,8 +4,8 @@ import './Header.css'
 export function Header(){
     return(
         <>
-            <header>
-                <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark poke-navegador">
+            <header className='sticky-top'>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark poke-navegador">
                     <Link className="navbar-brand logo" to="/">
                         <img src={icon} className="d-inline-block align-top pokeball" alt="Pokeball"/>
                         Pokedex
@@ -22,7 +22,7 @@ export function Header(){
                                 <Link href="/my-team" className='links' to="/my-team">My Team</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="#" className='links'>My Ranch</Link>
+                                <Link href="/my-ranch" className='links' to="/my-ranch">My Ranch</Link>
                             </li>
                         </ul>
                     </div>

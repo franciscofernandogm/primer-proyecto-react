@@ -1,15 +1,25 @@
-import {Results} from '../components/Pokemons/KantoPokemons';
-import {Slider} from '../components/Slider/Slider'
-import { useSlider } from '../hooks/useSlider';
-import { useSelector } from 'react-redux';
+import {useSlider} from "../hooks/useSlider.js"
+import { Results } from "../components/Pokemons/KantoPokemons.jsx"
+import { Slider } from "../components/Slider/Slider.jsx"
+import { useSelector } from "react-redux"
 
-const AllPokemons=()=>{
+const MyRanch=()=>{
 
-    const kantoPokemons=useSelector(state=>state.pokedex.pokemons)
+    const pokemons=useSelector(state=>state.pokedex.pokemons)
+    const isCatching=useSelector(state=>state.pokedex.isCatching)
     const loading=useSelector(state=>state.pokedex.isLoading)
-      
-    const pokemonsPorPagina = 18;
-    const {paginaActual, totalPaginas, changePage, handleChange, }=useSlider(pokemonsPorPagina,kantoPokemons)
+
+
+    const pokemonsCatching=[]
+    pokemons.map(pokemon=>{
+        if(isCatching[pokemon.id]){
+            pokemonsCatching.push(pokemon)
+        };
+    })
+
+    const pokemonsPorPagina = 9;
+
+    const {paginaActual, totalPaginas, changePage, handleChange}=useSlider(pokemonsPorPagina,pokemonsCatching)
 
     if (loading) {
         return (
@@ -23,8 +33,8 @@ const AllPokemons=()=>{
     }
 
     return(
-        <>  
-            <h1>Kanto's Pokemons</h1>
+        <>
+            <h1>My Ranch</h1>
             <div className="search">
                 <input type="text" placeholder="Search..." onChange={handleChange} />
             </div>
@@ -35,4 +45,4 @@ const AllPokemons=()=>{
     )
 }
 
-export default AllPokemons
+export default MyRanch
